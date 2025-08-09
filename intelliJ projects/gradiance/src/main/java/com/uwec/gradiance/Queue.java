@@ -1,19 +1,26 @@
 package com.uwec.gradiance;
 
 import ch.qos.logback.core.net.QueueFactory;
+import com.uwec.gradiance.database.Users;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.LinkedList;
 
 public class Queue {
     //members
+    @Getter
     private LinkedList<QueueNode> queueSelf;
     @Getter
+    @Setter
     private String ID;
+    @Getter
+    private Users created_by;
     //constructor
      public Queue(){
         this.queueSelf = new LinkedList<QueueNode>();
         this.ID = null; //where are we deriving a queue's ID from?
+         this.created_by = null;
     }
 
     //methods
@@ -50,6 +57,10 @@ public class Queue {
     //find a student by some form of primary key(currently set to email preemptively)
     //then return the node
     public QueueNode findStudent(String email){
+        QueueNode targetStudent = null;
+        return targetStudent;
+    }
+    public QueueNode findStudent(Long student_id){
         QueueNode targetStudent = null;
         return targetStudent;
     }
