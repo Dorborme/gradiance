@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "courses")
@@ -32,9 +32,6 @@ public class courses {
     @Getter
     @Setter
     private Users created_by;
-
-    @Column (name = "additional_users")
-    private ArrayList<Users> additional_users;
 
     //constructors
 

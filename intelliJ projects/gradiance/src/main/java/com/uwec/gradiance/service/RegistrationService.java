@@ -46,7 +46,7 @@ public class RegistrationService {
         user.setLastName(req.getLastName());
         user.setEmail(req.getEmail());
         user.setPassword(encoder.encode(req.getPassword()));
-        user.setRole(RoleEnum.STUDENT);  // set RoleEnum directly
+        //user.setRole(RoleEnum.STUDENT);  // set RoleEnum directly
         user.setAdminRights(0);
 
 

@@ -33,7 +33,6 @@ public class GradianceApplication {
 				admin.setLastName("User");
 				admin.setEmail("admin@example.com");
 				admin.setPassword(pw.encode("adminpass"));
-				admin.setRole(RoleEnum.INSTRUCTOR); // Assign admin-like role
 				admin.setAdminRights(1);            // Give admin rights
 
 				dao.save(admin);
