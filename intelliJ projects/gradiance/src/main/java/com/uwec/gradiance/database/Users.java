@@ -1,6 +1,5 @@
 package com.uwec.gradiance.database;
 
-import com.uwec.gradiance.model.RoleEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +21,8 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     @Getter
-    private Long id;
+    @Setter
+    private Long user_id;
 
     @Column(name = "student_id", unique = true, length = 20)
     @Getter
@@ -49,7 +49,7 @@ public class Users {
     @Setter
     private String email;
 
-    @Column(name = "password_hash", nullable = false, length = 255)
+    @Column(name = "password_hash", nullable = false)
     @Getter
     @Setter
     private String password;

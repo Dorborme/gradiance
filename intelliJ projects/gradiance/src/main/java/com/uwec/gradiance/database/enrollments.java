@@ -26,4 +26,10 @@ public class enrollments {
     @Setter
     private RoleEnum role;
 
+    //constructors
+    public enrollments(courses course_id, Users student_id, RoleEnum role){
+        this.course_id = course_id;
+        this.student_id = student_id;
+        this.role = role;
+    }
 }
