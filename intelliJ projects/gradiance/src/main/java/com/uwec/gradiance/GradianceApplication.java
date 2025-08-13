@@ -26,15 +26,14 @@ public class GradianceApplication {
 			// Ensure an admin user exists based on studentId
 			String adminStudentId = "admin001";
 			if (dao.findByStudentId(adminStudentId).isEmpty()) {
-				Users admin = new Users();
+				Users admin = new Users("admin@example.com", pw.encode("adminpass"));
 				admin.setStudentId(adminStudentId);
 				admin.setFirstName("Admin");
 				admin.setMiddleInitial("A");
 				admin.setLastName("User");
-				admin.setEmail("admin@example.com");
-				admin.setPassword(pw.encode("adminpass"));
+				//admin.setEmail("admin@example.com");
+				//admin.setPassword(pw.encode("adminpass"));
 				admin.setAdminRights(1);            // Give admin rights
-
 				dao.save(admin);
 				System.out.println(">>> Seeded default admin user: admin@example.com / adminpass");
 			}

@@ -11,7 +11,7 @@ public class competencies {
     //fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "competency_id", nullable = false)
+    @Column (name = "competency_id")
     @Getter
     private Long competency_id;
 

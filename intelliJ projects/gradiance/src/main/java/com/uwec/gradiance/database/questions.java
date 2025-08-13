@@ -17,7 +17,6 @@ public class questions {
     //fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "question_id", nullable = false)
     @Getter
     private Long question_id;
 
