@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 public class interviews {
     //fields
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "article_gen")
+    @SequenceGenerator(name="article_gen", sequenceName="user_serverid_seq")
     @Getter
     private Long interview_id;
 

@@ -10,7 +10,8 @@ import lombok.Setter;
 public class courses {
     //fields
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "article_gen")
+    @SequenceGenerator(name="article_gen", sequenceName="user_serverid_seq")
     @Column (name ="course_id")
     @Getter
     private Long course_id;

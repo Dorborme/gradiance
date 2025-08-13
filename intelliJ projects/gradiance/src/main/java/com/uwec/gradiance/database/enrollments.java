@@ -7,7 +7,8 @@ import lombok.Setter;
 
 public class enrollments {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "article_gen")
+    @SequenceGenerator(name="article_gen", sequenceName="user_serverid_seq")
     @Column(name = "enrollment_id")
     @Getter
     private Long enrollment_id;

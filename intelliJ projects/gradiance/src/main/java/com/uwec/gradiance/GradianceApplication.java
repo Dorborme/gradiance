@@ -1,7 +1,7 @@
 package com.uwec.gradiance;
 
 import com.uwec.gradiance.dao.GeneralDao;
-import com.uwec.gradiance.database.Users;
+import com.uwec.gradiance.database.*;
 import com.uwec.gradiance.model.RoleEnum;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,21 +23,21 @@ public class GradianceApplication {
 	@Bean
 	public CommandLineRunner seedData(GeneralDao dao, PasswordEncoder pw) {
 		return args -> {
-			// Ensure an admin user exists based on studentId
-			String adminStudentId = "admin001";
-			if (dao.findByStudentId(adminStudentId).isEmpty()) {
-				Users admin = new Users("admin@example.com", pw.encode("adminpass"));
-				admin.setStudentId(adminStudentId);
-				admin.setFirstName("Admin");
-				admin.setMiddleInitial("A");
-				admin.setLastName("User");
-				//admin.setEmail("admin@example.com");
-				//admin.setPassword(pw.encode("adminpass"));
-				admin.setAdminRights(1);            // Give admin rights
-				dao.save(admin);
-				System.out.println(">>> Seeded default admin user: admin@example.com / adminpass");
-			}
-		};
+            // Ensure an admin user exists based on studentId
+            String adminStudentId = "admin001";
+            if (dao.findByStudentId(adminStudentId).isEmpty()) {
+                Users admin = new Users("admin@example.com", pw.encode("adminpass"));
+                admin.setStudentId(adminStudentId);
+                admin.setFirstName("Admin");
+                admin.setMiddleInitial("A");
+                admin.setLastName("User");
+                //admin.setEmail("admin@example.com");
+                //admin.setPassword(pw.encode("adminpass"));
+                admin.setAdminRights(1);            // Give admin rights
+                dao.save(admin);
+                System.out.println(">>> Seeded default admin user: admin@example.com / adminpass");
+            }
+        };
 	}
 
 }
