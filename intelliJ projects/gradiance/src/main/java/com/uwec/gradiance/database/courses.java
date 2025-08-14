@@ -14,7 +14,7 @@ public class courses {
     @SequenceGenerator(name="article_gen", sequenceName="user_serverid_seq")
     @Column (name ="course_id")
     @Getter
-    private Long course_id;
+    private int course_id;
 
     @Column (name = "course_name", length = 100)
     @Getter

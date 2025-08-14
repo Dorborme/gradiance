@@ -19,7 +19,7 @@ public class questions {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "article_gen")
     @SequenceGenerator(name="article_gen", sequenceName="user_serverid_seq")
     @Getter
-    private Long question_id;
+    private int question_id;
 
     @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "parent_question_id", referencedColumnName = "question_id")

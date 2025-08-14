@@ -17,7 +17,7 @@ public class interviews {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "article_gen")
     @SequenceGenerator(name="article_gen", sequenceName="user_serverid_seq")
     @Getter
-    private Long interview_id;
+    private int interview_id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", referencedColumnName = "student_id")

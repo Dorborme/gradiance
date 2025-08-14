@@ -23,7 +23,7 @@ public class Users {
     @Column(name = "user_id")
     @Getter
     @Setter
-    private Long user_id;
+    private int user_id;
 
     @Column(name = "student_id", unique = true, length = 20)
     @Getter

@@ -11,7 +11,7 @@ public class enrollments {
     @SequenceGenerator(name="article_gen", sequenceName="user_serverid_seq")
     @Column(name = "enrollment_id")
     @Getter
-    private Long enrollment_id;
+    private int enrollment_id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="course_id", referencedColumnName = "course_id")

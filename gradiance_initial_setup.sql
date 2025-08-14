@@ -1,9 +1,9 @@
+drop table if exists enrollments;
 drop table if exists questionsduringinterview;
+drop table if exists interviews;
 drop table if exists questionusages;
 drop table if exists questions;
 drop table if exists competencies;
-drop table if exists interviews;
-drop table if exists enrollments;
 drop table if exists courses;
 drop table if exists users;
 drop type if exists user_role;

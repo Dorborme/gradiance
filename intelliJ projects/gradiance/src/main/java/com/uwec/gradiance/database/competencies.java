@@ -14,7 +14,7 @@ public class competencies {
     @SequenceGenerator(name="article_gen", sequenceName="user_serverid_seq")
     @Column (name = "competency_id")
     @Getter
-    private Long competency_id;
+    private int competency_id;
 
     @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "course_id")

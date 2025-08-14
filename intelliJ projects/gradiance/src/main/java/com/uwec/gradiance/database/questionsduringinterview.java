@@ -13,7 +13,7 @@ public class questionsduringinterview {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "article_gen")
     @SequenceGenerator(name="article_gen", sequenceName="user_serverid_seq")
     @Getter
-    private Long assignment_id;
+    private int assignment_id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "interview_id",referencedColumnName = "interview_id", nullable = false)
