@@ -12,11 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class RegistrationController {
-    private final RegistrationService regService;
-
-    public RegistrationController(RegistrationService regService) {
-        this.regService = regService;
-    }
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -24,21 +19,5 @@ public class RegistrationController {
         return "register";
     }
 
-    @PostMapping("/register")
-    public String processRegistration(
-            @ModelAttribute("registrationRequest")
-            @Valid RegistrationRequest request,
-            BindingResult errors,
-            Model model
-    ) {
-        regService.register(request, errors);
 
-        if (errors.hasErrors()) {
-            // errors will be rendered on the form
-            return "register";
-        }
-
-        // on success, redirect with a flash parameter
-        return "redirect:/login?registered";
-    }
 }

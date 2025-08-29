@@ -19,6 +19,7 @@ public class RegistrationService {
     }
 
     public void register(RegistrationRequest req, BindingResult errors) {
+        System.out.println("registration requesting");
         // 1. Check studentId uniqueness
         if (dao.existsByStudentId(req.getStudentId())) {
             errors.rejectValue("studentId", null, "Student ID already taken");
@@ -38,6 +39,8 @@ public class RegistrationService {
             return; // abort on validation errors
         }
 
+
+        System.out.println("user saving");
         // 4. Build and save user entity
         Users user = new Users();
         user.setStudentId(req.getStudentId());
@@ -46,7 +49,6 @@ public class RegistrationService {
         user.setLastName(req.getLastName());
         user.setEmail(req.getEmail());
         user.setPassword(encoder.encode(req.getPassword()));
-        user.setRole(RoleEnum.STUDENT);  // set RoleEnum directly
         user.setAdminRights(0);
 
 

@@ -11,10 +11,10 @@ public class Users {
         // Default constructor for JPA
     }
 
-    public Users(String email, String finalHash) {
+    public Users(String studentId, String email, String finalHash) {
         this.email = email;
         this.password = finalHash;
-        
+        this.studentId = studentId;
     }
     
     @Id
@@ -39,10 +39,6 @@ public class Users {
 
     @Column(name = "password_hash", nullable = false, length = 255)
     private String password;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
-    private RoleEnum role;
 
     @Column(name = "admin_rights", nullable = false)
     private int adminRights;
@@ -76,10 +72,6 @@ public class Users {
     public String getPassword() { return password; }
 
     public void setPassword(String password) { this.password = password; }
-
-    public RoleEnum getRole() { return role; }
-
-    public void setRole(RoleEnum role) { this.role = role; }
 
     public int getAdminRights() { return adminRights; }
 

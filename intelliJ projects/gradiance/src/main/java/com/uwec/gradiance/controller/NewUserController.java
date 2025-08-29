@@ -45,7 +45,7 @@ public class NewUserController {
      */
     @PostMapping("/newuser")
     public String register(@ModelAttribute("userDTO") UserDTO dto) {
-        userService.register(dto.getEmail(), dto.getPasswordHash());
+        userService.register(dto.getStudentId(),dto.getEmail(), dto.getPasswordHash());
         return "redirect:/login";
     }
 }

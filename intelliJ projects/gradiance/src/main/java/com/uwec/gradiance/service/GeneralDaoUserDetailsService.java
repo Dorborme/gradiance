@@ -23,15 +23,10 @@ public class GeneralDaoUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + email));
 
         System.out.println(">>> Logging in as: " + email);
-        System.out.println(">>> Role from DB: " + u.getRole());
-
-
-        String roleName = u.getRole().name().toUpperCase();
 
         return User.builder()
                 .username(u.getEmail())       // use email as username
-                .password(u.getPassword())    // password_hash in DB maps to getPassword()
-                .roles(roleName)              // pass single role string, no array needed
+                .password(u.getPassword())    // password_hash in DB maps to getPassword()/
                 .build();
     }
 }

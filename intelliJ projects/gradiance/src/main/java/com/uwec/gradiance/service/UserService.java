@@ -1,14 +1,17 @@
 package com.uwec.gradiance.service;
 
-import org.springframework.stereotype.Service;
 import com.uwec.gradiance.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import com.uwec.gradiance.database.Users;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Service
 public class UserService {
+    @Autowired
     private final UserRepository repo;
+    @Autowired
     private final PasswordEncoder encoder;
 
     /**
@@ -30,9 +33,9 @@ public class UserService {
      * @param email      The user's email address (used as login ID).
      * @param clientSha  The SHA-256 hash generated on the client-side.
      */
-    public void register(String email, String clientSha) {
+    public void register(String studentID, String email, String clientSha) {
         String finalHash = encoder.encode(clientSha);
-        repo.save(new Users(email, finalHash));
+        repo.save(new Users(studentID, email, finalHash));
     }
 
     /**
