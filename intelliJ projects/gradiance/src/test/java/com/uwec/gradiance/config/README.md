@@ -1,0 +1,1 @@
+This subdirectory will contain JUnit tests related to config classes in src folder
