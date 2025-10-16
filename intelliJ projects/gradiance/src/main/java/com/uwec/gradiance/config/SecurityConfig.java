@@ -1,7 +1,6 @@
 package com.uwec.gradiance.config;
 
 import com.uwec.gradiance.service.GeneralDaoUserDetailsService;
-import com.uwec.gradiance.config.QueueLogoutSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
