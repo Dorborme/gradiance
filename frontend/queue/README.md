@@ -1,4 +1,4 @@
-# Queue Module
+# Queue
 This folder contains all front-end pages related to the queue management system in Gradiance.
 
 ## Files
