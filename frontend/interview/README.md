@@ -1,4 +1,4 @@
-# Interview Module
+# Interview
 This folder contains all front-end pages related to the interview process in the Gradiance Queue and Interview Management System.
 
 ## Files
