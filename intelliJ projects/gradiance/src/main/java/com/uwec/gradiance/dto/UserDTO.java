@@ -1,4 +1,4 @@
-package com.uwec.gradiance.controller;
+package com.uwec.gradiance.dto;
 
 public class UserDTO {
     private String email;

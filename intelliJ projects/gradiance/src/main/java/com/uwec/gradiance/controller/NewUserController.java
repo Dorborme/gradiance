@@ -4,8 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.uwec.gradiance.dto.UserDTO;
 import com.uwec.gradiance.service.UserService;
-import com.uwec.gradiance.controller.UserDTO;
+
 import org.springframework.ui.Model;
 
 @Controller
