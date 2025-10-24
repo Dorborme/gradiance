@@ -1,1 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Queue Page - Gradiance</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/theme/GradianceThemeStyle.css">
+  <link rel="icon" href="image/icon.png" type="image/icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+<style>
+/* ========================== Global layout ========================== */
+body {
+  background-color: #f8f9fa;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: center;
+}
+
+/* ========================== Navigation bar ========================== */
+.navbar-custom {
+  background-color: #e3eaf5;
+  border-bottom: 2px solid #436599;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar-left img {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.nav-link {
+  color: #2e3b55;
+  font-weight: 500;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: #436599;
+  color: white;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-btn {
+  border: none;
+  background: none;
+  font-size: 1.4rem;
+  color: #2e3b55;
+  transition: color 0.3s, transform 0.3s;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+
+.icon-btn:hover {
+  color: #0d6efd;
+  transform: scale(1.15);
+  background-color: rgba(67, 101, 153, 0.1);
+}
+
+/* ========================== Main layout ========================== */
+.main-container {
+  display: flex;
+  flex-direction: row;
+  height: calc(100vh - 80px);
+  padding: 20px 40px;
+  gap: 20px;
+}
+
+.left-panel,
+.right-panel {
+  background-color: #e9f0fb;
+  border: 2px solid #436599;
+  border-radius: 8px;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.left-panel {
+  flex: 1;
+  max-width: 350px;
+  min-width: 300px;
+}
+
+.right-panel {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* ========================== The card and button on the left ========================== */
+.card-section {
+  width: 90%;
+  background-color: #ffffff;
+  border: 1.5px solid #dbe4f3;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(67, 101, 153, 0.08);
+}
+
+.card-section h6 {
+  color: #2e3b55;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+select.form-select {
+  border: 1.5px solid #436599;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.availability-card {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1.5px solid #dbe4f3;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 2px 6px rgba(67, 101, 153, 0.08);
+}
+
+.availability-card h6 {
+  font-size: 15px;
+  color: #2e3b55;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.status-box {
+  display: inline-block;
+  padding: 6px 20px;
+  border-radius: 8px;
+  border: 1.5px solid #436599;
+  background-color: #f8fbff;
+  color: #2e3b55;
+  font-weight: 500;
+}
+
+.btn-join {
+  width: 90%;
+  background-color: #436599;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-join:hover {
+  background-color: #2f4871;
+  transform: translateY(-2px);
+}
+
+/* ========================== Broadcast ========================== */
+.broadcast-section {
+  background-color: #ffffff;
+  border: 2px solid #436599;
+  border-radius: 8px;
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  height: 140px;
+}
+
+.broadcast-section h6 {
+  color: #2e3b55;
+  font-weight: 600;
+  margin-bottom: 6px;
+  text-align: left;
+}
+
+.broadcast-box {
+  flex: 1;
+  width: 100%;
+  border: 1.5px solid #436599;
+  border-radius: 8px;
+  padding: 8px;
+  background-color: #ffffff;
+  overflow-y: auto;
+  text-align: left;
+}
+
+/* ========================== The main structure of Queue ========================== */
+.queue-container {
+  background-color: #ffffff;
+  border: 2px solid #436599;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+/* ========================== Left side of Queue ========================== */
+.queue-left {
+  flex: 1;
+  border-right: 1.5px solid #436599;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8fbff;
+}
+
+.queue-left h6 {
+  background-color: #0d6efd;
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  padding: 8px;
+  margin: 0;
+  border-bottom: 2px solid #436599;
+}
+
+.queue-left-content {
+  width: 90%;
+  text-align: center;
+  margin-top: 25px;
+}
+
+.queue-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2e3b55;
+  margin-bottom: 8px;
+}
+
+.queue-number-box {
+  border: 2px solid #436599;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 160px;
+  height: 65px;
+  margin: 0 auto 15px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(67, 101, 153, 0.1);
+}
+
+.queue-number {
+  font-size: 40px;
+  font-weight: 600;
+  color: #2e3b55;
+}
+
+.queue-estimate-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2e3b55;
+  margin-bottom: 8px;
+}
+
+.queue-time-box {
+  border: 1.5px solid #436599;
+  border-radius: 8px;
+  padding: 8px 12px;
+  width: 85%;
+  max-width: 200px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  box-shadow: inset 0 1px 2px rgba(67, 101, 153, 0.1);
+  font-size: 15px;
+  color: #2e3b55;
+  font-weight: 500;
+}
+
+/* ========================== Right side of Queue ========================== */
+.queue-right {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 0 8px 8px 0;
+  overflow: hidden;
+}
+
+.queue-right h6 {
+  background-color: #0d6efd;
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  padding: 8px;
+  margin: 0;
+  border-bottom: 2px solid #436599;
+}
+
+/* 表格样式 */
+table.queue-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+table.queue-table th,
+table.queue-table td {
+  border: 1px solid #d3dae7;
+  padding: 10px;
+  font-size: 15px;
+  text-align: center;
+  color: #2e3b55;
+}
+
+table.queue-table th {
+  background-color: #e9effb;
+  font-weight: 600;
+}
+
+table.queue-table tr:nth-child(even) {
+  background-color: #f8fbff;
+}
+
+table.queue-table tr:hover {
+  background-color: #edf3ff;
+  transition: background-color 0.3s ease;
+}
+
+/* 限高 + 滚动，但保持布局 */
+.queue-table-wrapper {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+/* ========================== Dark Mode ========================== */
+body.dark-mode {
+  background-color: #181a1b !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode * {
+  color: #ffffff !important;
+}
+
+body.dark-mode .navbar-custom {
+  background-color: #2b2b2b !important;
+  border-bottom: 2px solid #666 !important;
+}
+
+body.dark-mode .icon-btn {
+  color: #ffffff !important;
+}
+
+body.dark-mode .left-panel,
+body.dark-mode .right-panel {
+  background-color: #202225 !important;
+  border: 1.5px solid #888 !important;
+}
+
+body.dark-mode .card-section,
+body.dark-mode .availability-card {
+  background-color: #2b2b2b !important;
+  border: 1.5px solid #888 !important;
+}
+
+body.dark-mode .status-box {
+  background-color: #3a3a3a !important;
+  border: 1.5px solid #aaa !important;
+}
+
+body.dark-mode .btn-join {
+  background-color: #536b9a !important;
+  color: white !important;
+  border: 1.5px solid #aaa !important;
+}
+
+body.dark-mode .btn-join:hover {
+  background-color: #6786c8 !important;
+}
+
+body.dark-mode .broadcast-section {
+  background-color: #2b2b2b !important;
+  border: 1.5px solid #888 !important;
+}
+
+body.dark-mode .broadcast-box {
+  background-color: #1f1f1f !important;
+  border: 1.5px solid #888 !important;
+}
+
+body.dark-mode .queue-container {
+  background-color: #222 !important;
+  border: 1.5px solid #888 !important;
+}
+
+body.dark-mode .queue-left {
+  background-color: #1f1f1f !important;
+  border-right: 1.5px solid #888 !important;
+}
+
+body.dark-mode .queue-left h6 {
+  background-color: #3d56cc !important;
+  border-bottom: 2px solid #888 !important;
+}
+
+body.dark-mode .queue-number-box,
+body.dark-mode .queue-time-box {
+  background-color: #2b2b2b !important;
+  border: 1.5px solid #888 !important;
+}
+
+body.dark-mode .queue-right {
+  background-color: #1f1f1f !important;
+}
+
+body.dark-mode .queue-right h6 {
+  background-color: #3d56cc !important;
+  border-bottom: 2px solid #888 !important;
+}
+
+body.dark-mode table.queue-table {
+  background-color: #1f1f1f !important;
+  border-collapse: collapse;
+}
+
+body.dark-mode table.queue-table th,
+body.dark-mode table.queue-table td {
+  background-color: #2b2b2b !important;
+  border: 1px solid #888 !important;
+}
+
+body.dark-mode table.queue-table tr:nth-child(even) {
+  background-color: #242424 !important;
+}
+
+body.dark-mode table.queue-table tr:hover {
+  background-color: #333 !important;
+  transition: background-color 0.3s ease;
+}
+  
+/* ===============The select arrow in dark mode ========================== */
+body.dark-mode select.form-select {
+  color: #ffffff !important;
+  background-color: #3a3a3a !important;
+  border: 1.5px solid #aaa !important;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #ffffff 50%),
+                    linear-gradient(135deg, #ffffff 50%, transparent 50%);
+  background-position: calc(100% - 18px) center, calc(100% - 13px) center;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 25px;
+}
+
+body.dark-mode select.form-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #5c6f98;
+}
+
+/* ========================== Join Meeting Button ========================== */
+.btn-meeting {
+  margin-top: 100px;
+  background-color: #436599;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 25px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px rgba(67, 101, 153, 0.25);
+}
+
+.btn-meeting:hover {
+  background-color: #2f4871;
+  transform: translateY(-2px);
+}
+
+body.dark-mode .btn-meeting {
+  background-color: #536b9a !important;
+  color: #ffffff !important;
+  border: 1.5px solid #aaa !important;
+  box-shadow: 0 3px 6px rgba(255, 255, 255, 0.15);
+}
+
+body.dark-mode .btn-meeting:hover {
+  background-color: #6786c8 !important;
+  transform: translateY(-2px);
+}
+
+</style>
+
+</head>
+
+<body>
+  <!-- ===== Navigation bar ===== -->
+  <nav class="navbar-custom">
+    <div class="navbar-left">
+      <a href="./student_homepage.html" id="logo">
+        <img src="image/icon1.png" alt="Gradiance Logo">
+      </a>
+      <a href="./student_class_info.html" class="nav-link">Class Info</a>
+      <a href="./student_queue.html" class="nav-link active" onclick="event.preventDefault();">Queue</a>
+    </div>
+    <div class="navbar-right">
+      <button class="icon-btn" id="darkModeBtn"><i class="bi bi-moon-fill"></i></button>
+      <button class="icon-btn" title="Settings"><i class="bi bi-gear-fill"></i></button>
+    </div>
+  </nav>
+
+  <!-- ===== Main body part ===== -->
+  <div class="main-container">
+    <!-- Left panel -->
+    <div class="left-panel">
+      <div class="card-section">
+        <h6>Class Selection</h6>
+        <select id="classSelect" class="form-select text-center">
+          <option>Loading...</option>
+        </select>
+      </div>
+
+      <div class="availability-container">
+        <div class="availability-card">
+          <h6>Instructor Availability</h6>
+          <div class="status-box" id="instructorStatus">Status of instructor</div>
+        </div>
+
+        <div class="availability-card">
+          <h6>TA Availability</h6>
+          <div class="status-box" id="taStatus">Status of TA</div>
+        </div>
+      </div>
+
+      <button id="joinBtn" class="btn-join">Join / Leave Queue</button>
+    </div>
+
+    <!-- Content on the right -->
+    <div class="right-panel">
+      <!-- Broadcast -->
+      <div class="broadcast-section">
+        <h6>Broadcast</h6>
+        <div id="broadcastBox" class="broadcast-box">
+          <p class="text-muted">Loading messages...</p>
+        </div>
+      </div>
+
+      <!-- Queue Status -->
+      <div class="queue-container">
+        <div class="queue-left">
+        <h6>My Queue Status</h6>
+        <div class="queue-left-content">
+          <div class="queue-label">Place in Queue</div>
+          <div class="queue-number-box">
+            <div class="queue-number" id="queueOrder">-</div>
+          </div>
+
+          <div class="queue-estimate-label">Estimated Time:</div>
+          <div class="queue-time-box">
+            <span id="queueTime">-</span>
+          </div>
+          <a href="./student_interview.html" id="logo"><button class="btn-meeting">Join Meeting</button></a>
+        </div>
+      </div>
+
+        <div class="queue-right">
+          <h6>Queue Overview</h6>
+          <table class="queue-table" id="queueTable">
+            <thead>
+              <tr><th>Order</th><th>First Name</th><th>Last Name</th></tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="3" class="text-muted">Loading queue...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const BASE_URL = "http://localhost:8080/api/student";
+
+    async function fetchClassList() {
+      const select = document.getElementById("classSelect");
+      try {
+        const res = await fetch(`${BASE_URL}/classes`);
+        const data = await res.json();
+        select.innerHTML = "";
+        data.forEach(cls => {
+          const opt = document.createElement("option");
+          opt.value = cls.id;
+          opt.textContent = cls.name;
+          select.appendChild(opt);
+        });
+      } catch {
+        select.innerHTML = '<option>Error loading classes</option>';
+      }
+    }
+
+    async function fetchInstructorStatus() {
+      try {
+        const res = await fetch(`${BASE_URL}/instructor/status`);
+        const data = await res.json();
+        updateStatusBox("instructorStatus", data.status);
+      } catch {
+        updateStatusBox("instructorStatus", "Unavailable");
+      }
+    }
+
+    async function fetchTAStatus() {
+      try {
+        const res = await fetch(`${BASE_URL}/ta/status`);
+        const data = await res.json();
+        updateStatusBox("taStatus", data.status);
+      } catch {
+        updateStatusBox("taStatus", "Unavailable");
+      }
+    }
+
+    function updateStatusBox(elementId, status) {
+      const box = document.getElementById(elementId);
+      box.textContent = status || "Unknown";
+      box.classList.remove("available", "unavailable");
+      if (status?.toLowerCase() === "available") box.classList.add("available");
+      else box.classList.add("unavailable");
+    }
+
+    async function fetchBroadcasts() {
+      try {
+        const res = await fetch(`${BASE_URL}/broadcast`);
+        const data = await res.json();
+        const box = document.getElementById("broadcastBox");
+        box.innerHTML = "";
+        if (!data || data.length === 0) {
+          box.innerHTML = '<p class="text-muted">No broadcast messages.</p>';
+          return;
+        }
+        data.forEach(msg => {
+          const p = document.createElement("p");
+          p.textContent = msg;
+          box.appendChild(p);
+        });
+      } catch {
+        document.getElementById("broadcastBox").innerHTML = '<p class="text-danger">Error loading messages.</p>';
+      }
+    }
+
+    async function fetchQueueStatus() {
+      try {
+        const res = await fetch(`${BASE_URL}/queue/status`);
+        const data = await res.json();
+        document.getElementById("queueOrder").textContent = data.order ?? "-";
+        document.getElementById("queueTime").textContent = data.estimatedTime ?? "-";
+      } catch {
+        document.getElementById("queueOrder").textContent = "-";
+        document.getElementById("queueTime").textContent = "-";
+      }
+    }
+
+    async function fetchQueueList() {
+      try {
+        const res = await fetch(`${BASE_URL}/queue/list`);
+        const data = await res.json();
+        const tbody = document.querySelector("#queueTable tbody");
+        tbody.innerHTML = "";
+        if (!data || data.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="3" class="text-muted">Queue is empty</td></tr>';
+          return;
+        }
+        data.forEach((p) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${p.position}</td><td>${p.firstName}</td><td>${p.lastName}</td>`;
+          tbody.appendChild(tr);
+        });
+      } catch {
+        document.querySelector("#queueTable tbody").innerHTML = '<tr><td colspan="3" class="text-danger">Error loading queue</td></tr>';
+      }
+    }
+
+    async function toggleQueue() {
+      const classId = document.getElementById("classSelect").value;
+      try {
+        const res = await fetch(`${BASE_URL}/queue/toggle`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ classId })
+        });
+        const msg = await res.text();
+        alert(msg);
+        fetchQueueStatus();
+        fetchQueueList();
+      } catch {
+        alert("Failed to update queue.");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const darkBtn = document.getElementById("darkModeBtn");
+      const icon = darkBtn.querySelector("i");
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+        icon.classList.replace("bi-moon-fill", "bi-sun-fill");
+      }
+
+      darkBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        if (document.body.classList.contains("dark-mode")) {
+          localStorage.setItem("theme", "dark");
+          icon.classList.replace("bi-moon-fill", "bi-sun-fill");
+        } else {
+          localStorage.setItem("theme", "light");
+          icon.classList.replace("bi-sun-fill", "bi-moon-fill");
+        }
+      });
+
+      fetchClassList();
+      fetchInstructorStatus();
+      fetchTAStatus();
+      fetchBroadcasts();
+      fetchQueueStatus();
+      fetchQueueList();
+
+      document.getElementById("joinBtn").addEventListener("click", toggleQueue);
+
+      setInterval(() => {
+        fetchInstructorStatus();
+        fetchTAStatus();
+        fetchBroadcasts();
+        fetchQueueStatus();
+        fetchQueueList();
+      }, 30000);
+    });
+  </script>
+</body>
+</html>
+
 
