@@ -1,20 +1,21 @@
-package com.uwec.gradiance;
+package com.uwec.gradiance.model;
 
 import lombok.Getter;
 
 public class QueueNode {
 
     //members
-        @Getter
-        private String email;
-        @Getter
-        private String course;
-        @Getter
-        private String evaluation;
-        @Getter
-        private long joinTime;
-        @Getter
-        private int priority;
+    @Getter
+    private String email;
+    @Getter
+    private String course;
+    @Getter
+    private String evaluation;
+    @Getter
+    private long joinTime;
+    @Getter
+    private int priority;
+
     //constructor
     QueueNode(String email, String course, String evaluation){
         this.email = email;
@@ -23,7 +24,8 @@ public class QueueNode {
         this.joinTime = System.currentTimeMillis();
         this.priority = 0;
     }
+
     public void setPriority(int mod){
-        this.priority += mod;
+        this.priority = mod;
     }
 }
