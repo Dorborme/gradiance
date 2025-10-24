@@ -1,6 +1,7 @@
-package com.uwec.gradiance;
+package com.uwec.gradiance.model;
 
 import ch.qos.logback.core.net.QueueFactory;
+
 import com.uwec.gradiance.database.Users;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import java.util.LinkedList;
 
 public class Queue {
+
     //members
     @Getter
     private LinkedList<QueueNode> queueSelf;
@@ -33,8 +35,8 @@ public class Queue {
         while(queueSelf.iterator().hasNext()){
             currentOutput = queueSelf.iterator().next();
             if(currentOutput.getEvaluation() == priorityTarget || currentOutput.getCourse() == priorityTarget){
-                currentOutput.setPriority(1);
-            } else if(currentOutput.getPriority() >= 1) currentOutput.setPriority(-1);
+                currentOutput.setPriority(currentOutput.getPriority() + 1);
+            } else if(currentOutput.getPriority() >= 1) currentOutput.setPriority(currentOutput.getPriority() - 1);
         }
     }
     //find the next student who should be called in by default

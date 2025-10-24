@@ -1,7 +1,8 @@
-package com.uwec.gradiance;
+package com.uwec.gradiance.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
