@@ -1,0 +1,1 @@
+This subdirectory will contain JUnit tests related to database classes (that each define an entity) in src folder.
