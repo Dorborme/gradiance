@@ -11,7 +11,9 @@ import lombok.Setter;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class Queue {
 
@@ -143,6 +145,45 @@ public boolean canJoinQueue(String email, String course) {
         }
     }
     return true;
+
+}
+private int getTimeForCompetency(String competency) {
+    switch (competency) {
+        case "Example1": return 20;
+        case "Example2": return 15;
+        case "Example3": return 15;
+        
+        default: return 15; // default timer for compenecy not listed
+    }
+}
+
+/**
+ * Returns estimated wait time in minutes for a given student,
+ * calculated dynamically per their competency.
+ */
+public int getEstimatedWaitTime(QueueNode target) {
+    int waitTime = 0;
+    for (QueueNode node : queueSelf) {
+        if (node == target) break;
+        waitTime += getTimeForCompetency(node.getEvaluation());
+    }
+    return waitTime;
+}
+
+/**
+ * Returns estimated wait time for all students in the queue,
+ * automatically calculated based on each student’s competency.
+ */
+public Map<QueueNode, Integer> getAllEstimatedWaitTimes() {
+    Map<QueueNode, Integer> waitTimes = new LinkedHashMap<>();
+    int cumulativeTime = 0;
+
+    for (QueueNode node : queueSelf) {
+        waitTimes.put(node, cumulativeTime);
+        cumulativeTime += getTimeForCompetency(node.getEvaluation());
+    }
+
+    return waitTimes;
 }
 
     
